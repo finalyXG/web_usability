@@ -77,11 +77,36 @@ get_mbox_top_text_alignment_type
 %% stage 2 size and position
 stage_2_size_and_position
 
+%% get color theme
+page_img_test_segmented = [];
+for i = 1 : length(page_imgs_test)
+    page_img_test_segmented = msseg(page_imgs_test{i});
+    return;
+end
+
 %%
+img = page_imgs_test{1};
+img_rs = imresize(img, [200 NaN],'bicubic');
+img_msseg = rgb2lab(msseg(img_rs) );
 
+l = img_msseg(:,:,1);
+a = img_msseg(:,:,2);
+b = img_msseg(:,:,3);
+lab = [l(:) a(:) b(:)];
 
-
+[idx,C] = kmeans(lab,4,'Replicates',10);
+C_rgb = lab2rgb(C);
+% [X,cmap] = rgb2ind(img_msseg,4);
+% return;
+figure(1),imshow(lab2rgb(img_msseg));
 %%
+figure(2),
+imagesc([1 4],[1 1],[1:4])
+colormap(C_rgb)
+
+%% try saliency & color theme extraction
+gbvs
+
 %%
 r = [220:220];
 for i = 1 : length(page_imgs_test)
@@ -137,6 +162,259 @@ end
 clc; ind = 6;
 figure(4),imshow(page_imgs_test{ind}),plot_multi_boxes(page_btn_test_candidata_mbox{ind})
 page_btn_alignment_test{ind}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
