@@ -1,0 +1,22 @@
+function y=crossval(X,d,hh,K)
+% function y=crossval(X,d,hh,K)
+% cross-val. function
+
+y=[];
+n=length(X);
+for h=hh
+ S=max(X)+h;
+ xx=linspace(0,S,201);
+ lam=K_hafest(X,d,K,xx,h);
+ II=sum(lam.^2)*S/200;
+ I1=find(d==1);
+ pomsum=0;
+ for ind1=I1
+  XX=X;
+  dd=d;
+  XX(ind1)=[];
+  dd(ind1)=[];
+  pomsum=pomsum+K_hafest(XX,dd,K,X(ind1),h)/(1-L_n(X(ind1)));
+ end
+ y=[y,II-pomsum*2/n];
+end

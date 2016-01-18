@@ -1,0 +1,6 @@
+function h0=cvmin(X,d,K)
+MX=max(X);
+hh=linspace(MX/100,MX/2,200);
+cv=crossval(X,d,hh,K);
+[cv0,I]=min(cv);
+h0=hh(I);

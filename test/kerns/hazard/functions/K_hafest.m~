@@ -1,0 +1,30 @@
+function y=K_hafest(X,d,K,x,h)
+% function y=K_hafest(X,d,K,xx,h)
+% kernel estimation of hazard function
+
+ny=K.ny;
+k=K.k;
+
+X=row(X);
+[XX,in]=sort(X);
+dd=row(d(in));
+
+x=row(x);
+n=length(X);
+y=[];
+hp=h;
+for i=1:ny
+ hp=hp*h;
+end
+
+pn=1./(n+1-(1:n));
+for xx=x
+ px=(xx-XX)/h;
+ yp=dd.*K_val(K,px).*pn;
+% yp=yp.*dd;
+ y=[y sum(yp)/(hp)];
+end
+if ny==0
+ y=y.*(y>0);
+end
+return

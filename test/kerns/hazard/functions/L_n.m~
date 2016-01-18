@@ -1,0 +1,12 @@
+function y=distf_emp(X,x)
+% empirical distribution function
+y=[];
+n=length(X);
+size(x)
+size(X)
+for xx=x
+xx
+    yp=sum(X<=xx);
+    y=[y,yp];
+end
+y=y/(n+1);

@@ -1,0 +1,25 @@
+function c2=c_two(X,K)
+
+ker02=K;
+ny=K.nu;
+k=K.k;
+mi=K.mu;
+ker04=K_def('opt',ny,k+2,mi);
+ker24=K_def('opt',ny+2,k+2,mi);
+mX=mean(X);
+n=length(X);
+%sig2=sum((X-mX).^2)/(n-1);
+%sig=sqrt(sig2);
+sig=std(X);
+%c1=c_one(w);
+k=k+2;
+ny=ny+2;
+b_k=3.3175;
+h_old=sig*b_k*n^(-1/(2*k+1));
+[h0,pociter,iterace]=iter_bistef(h_old,X,ker04,30,0.0001);
+gama04=(ker04.var/(ker04.beta)^2)^(1/(2*k+1));
+gama24=(ker24.var/(ker24.beta)^2)^(1/(2*k+1));
+h2=((2*ny+1)*k/(k-ny))^(1/(2*k+1))*(gama24/gama04)*h0;
+psi2=psi_two(X,ker24,h2);
+beta2=ker02.beta;
+c2=abs(psi2)*beta2^2/4;

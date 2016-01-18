@@ -1,0 +1,26 @@
+function y=maxlike(X,d,hh,K)
+% function y=maxlike(X,d,hh,K)
+% cross-val. function
+
+y=[];
+n=length(X);
+X=row(X);
+d=row(d);
+for h=hh
+h
+ S=max(X)+h;
+ xx=linspace(0,S,201);
+ I1=find(d==1);
+ pomsum=1;
+ for ind1=I1
+  XX=X;
+  dd=d;
+  XX(ind1)=[];
+  dd(ind1)=[];
+  val1=K_hafest(XX,dd,K,X(ind1),h);
+  xx=linspace(0,X(ind1),201);
+  val2=sum(K_hafest(XX,dd,K,xx,h))*X(ind1)/200;
+  pomsum=pomsum*val1*exp(-val2);
+ end
+ y=[y,pomsum];
+end

@@ -1,0 +1,5 @@
+function h=h_iter(X,d,K)
+
+h1=cvmin(X,d,K);
+h2=mlmin((X,d,K);
+h-(h1+h2)/2;
