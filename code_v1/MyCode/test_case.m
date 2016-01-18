@@ -78,18 +78,7 @@ get_mbox_top_text_alignment_type
 stage_2_size_and_position
 
 %%
-get_BTNs_colors
-get_xBtn_colors_test
-get_images
-get_mbox_color
-get_images_test
-get_mbox_color_test
 
-
-
-%%
-get_td_color
-get_td_color_test
 
 
 %%
@@ -140,7 +129,7 @@ hold off;
 
 input('dump');
 end
-
+  
 
 
 %% wuliao
