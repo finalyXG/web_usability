@@ -20,8 +20,10 @@ maxNumberOfDatapoints=50000;
 %create the datapoints and features
 datapoints = createDatapoints(dataset,maxNumberOfDatapoints);
 
+
+%%
 %create a random split
-datasplit=[0.6 0.4];
+datasplit=[0.9 0.1];
 numPts=size(datapoints.features,1);
 randomize=randperm(numPts);
 trainingPts=randomize(1:(round(datasplit(1)*numPts)));
@@ -42,6 +44,8 @@ fit = glmnet(datapoints.features(trainingPts,:), datapoints.targets(trainingPts)
 testingTargets=datapoints.targets(testingPts);
 testingPredictions = glmnetPredict(fit, 'response', datapoints.features(testingPts,:));
 
+
+%%
 %compute the mean absolute error for regressor and for the fixed estimator baseline
 meanAbsErr=mean(abs(testingTargets-testingPredictions))
 fixedMeanAbsErr=mean(abs(testingTargets-mean(datapoints.targets(trainingPts))))

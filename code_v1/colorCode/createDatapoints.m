@@ -30,7 +30,7 @@ datapoints.allFeatures=allFeatures;
 datapoints.ids=ids(1:numThemes);
 datapoints.names=names(1:numThemes);
 datapoints.targets=targets(1:numThemes);
-
+% datapoints
 [datapoints.features datapoints.featureNames]=createFeatureMatrix(datapoints,{'*'},1);
 
 

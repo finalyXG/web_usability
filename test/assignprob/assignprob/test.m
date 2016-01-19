@@ -2,7 +2,8 @@ clc
 disp('Testing hungarian...');
 A=magic(10);
 B=A(4:7,4:7);
-[c,t]=hungarian(B);
+[c,t]=hungarian(-A)
+return;
 if (any(c~=[2 1 3 4]))
 	disp('Wrong coupling!');
 elseif (t~=77)
