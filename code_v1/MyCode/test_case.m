@@ -75,88 +75,14 @@ get_mbox_top_text_alignment_type
 % get_page_mboxes_DT_test 
 
 %% stage 2 size and position
-stage_2_size_and_position
+stage_2_size_and_position 
 
 %% get global color theme score
+tic
 get_global_color_theme_score
-
-%% global 4-color theme from whole region of image
-img = page_imgs_test{1};
-img_rs = imresize(img, [200 NaN],'bicubic');
-img_msseg = rgb2lab(msseg(img_rs) );
-
-l = img_msseg(:,:,1);
-a = img_msseg(:,:,2);
-b = img_msseg(:,:,3);
-lab = [l(:) a(:) b(:)];
-
-[idx,C] = kmeans(lab,4,'Replicates',20);
-C_rgb = lab2rgb(C);
-
-figure(1),imshow(lab2rgb(img_msseg));
-figure(2),
-imagesc([1 4],[1 1],[1:4])
-colormap(C_rgb)
-
-
-%% generate grid color space
-generate_grid_color_space
-
-%%
-c1 = importdata('grid_color.mat');
-c4 = C_rgb;
-c4_r = c4(:,1);
-c4_g = c4(:,2);
-c4_b = c4(:,3);
-c5 = zeros(size(c1,1),5,3);
-
-ind = 0;
-for i = 1 : size(c1,1)
-    ind = ind + 1; 
-    c5(ind,1,:) = c1(i,:);
-    c5(ind,2,:) = c4(1,:);
-    c5(ind,3,:) = c4(2,:);
-    c5(ind,4,:) = c4(3,:);
-    c5(ind,5,:) = c4(4,:);
-end
-% return;
-% c5 = data(1:2,1:5,:);
-a = c5(1,1:5,:);
-
-% for i = 1 : size(c5,1);
-%     a = data(i,1:5,:);
-%     rgb = [a(:,:,1)' a(:,:,2)' a(:,:,3)'];
-%     figure(1),imagesc([1,5],[1,1],[1:5]);
-%     colormap(rgb);
-%     input('d');
-% end
-
-% return;
-
-% data(1,:,:)
-% return;
-% test_color_targets = zeros(size(c5,1),1);
-% randomize=randperm(length(targets));
-% data=data(randomize,:,:);
-% ids=ids(randomize);
-% targets=targets(randomize);
-% names=names(randomize);
-
-% c5 = data;
-test_num = size(c5,1);
-names = cell(test_num,1);
-% [allFeatures featureNames numThemes rgbs labs]= createFeaturesFromData(c5,test_num);
-[allFeatures featureNames numThemes rgbs labs]= createFeaturesFromData(c5,test_num);
-%set the output structure 
-datapoints=[];
-% datapoints.rgb=rgbs;
-% datapoints.lab=labs;
-datapoints.allFeatureNames=featureNames;
-datapoints.allFeatures=allFeatures;
-% datapoints.ids=ids(1:numThemes);
-% datapoints.names=names(1:numThemes);
-% datapoints.targets=targets(1:numThemes);
-[datapoints.features datapoints.featureNames]=createFeatureMatrix(datapoints,{'*'},0);
+toc
+%% get local color theme score
+get_local_color_theme_score
 
 %%
 % td

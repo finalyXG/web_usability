@@ -12,10 +12,10 @@ function plot_multi_boxes( rectangles, type, face_color)
         
         if exist('type','var') &&  ~isempty(type) 
             if mark_face_color == 1
-                face_color(i,:)
+                face_color(i,:);
                 rectangle('Position',rectangles(i,:),'Curvature',0.2,'EdgeColor', ...
                  'none','LineWidth',2,'FaceColor',face_color(i,:));   
-                text(rectangles(i,1) + round(0.5*rectangles(i,3) - 40),rectangles(i,2)+round(rectangles(i,4)*0.5-8 ),'Button','Color',[1,1,1]);
+%                 text(rectangles(i,1) + round(0.5*rectangles(i,3) - 40),rectangles(i,2)+round(rectangles(i,4)*0.5-8 ),'Button','Color',[1,1,1]);
             else
                 rectangle('Position',rectangles(i,:),'Curvature',0.2,'EdgeColor', ...
                  type,'LineWidth',2);

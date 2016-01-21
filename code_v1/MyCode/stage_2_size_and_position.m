@@ -92,3 +92,5 @@ toc
 %%
 handle_x_offset_by_alignment_type
 handle_y_offset_by_alignment_type
+%%
+get_page_btn_test
